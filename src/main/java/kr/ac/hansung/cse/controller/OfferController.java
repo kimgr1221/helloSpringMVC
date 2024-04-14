@@ -31,7 +31,7 @@ public class OfferController {
     @GetMapping("/createoffer")
     public String createOffer(Model model) {
 
-        model.addAttribute("offer", new Offer()); // 모델에 offer 속성을 추가하여 새로운 Offer 객체를 전달합니다.
+        model.addAttribute("offer", new Offer());
 
         return "createoffer";
     }
@@ -41,10 +41,10 @@ public class OfferController {
 
         // System.out.println(offer);
 
-        if(result.hasErrors()) { // 만약 입력 데이터에 유효성 검사 오류가 있다면
+        if(result.hasErrors()) {
             System.out.println("== Form data does not validated ==");
 
-            List<ObjectError> errors = result.getAllErrors(); // 모든 오류를 가져와서 처리합니다.
+            List<ObjectError> errors = result.getAllErrors();
 
             for(ObjectError error:errors) {
                 System.out.println(error.getDefaultMessage());
@@ -54,7 +54,7 @@ public class OfferController {
         }
 
         // Controller -> Service -> Dao
-        offerService.insert(offer); // Service를 통해 새 교과목을 삽입합니다.
+        offerService.insert(offer);
 
         return "home";
     }

@@ -29,6 +29,5 @@ public class Offer {
     @NotEmpty(message="The professor cannot be empty")
     private String professor;
 
-    @NotEmpty(message="The credit cannot be empty")
     private int credit;
 }
