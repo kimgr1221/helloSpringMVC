@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>수강 신청</title>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/resources/css/main.css" >
 
@@ -19,26 +19,44 @@
 <sf:form method="post" action="${pageContext.request.contextPath}/docreate" modelAttribute="offer">
     <table class="formtable">
         <tr>
-            <td class="label"> Name:</td>
+            <td class="label"> 년도:</td>
+            <td><sf:input class="control" type="text" path="year" value="2024"/> <br />
+                <sf:errors path="year" class="error" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label"> 학기:</td>
+            <td><sf:input class="control" type="text" path="semester" value="2"/> <br />
+                <sf:errors path="semester" class="error" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label"> 교과목명:</td>
             <td><sf:input class="control" type="text" path="name"/> <br />
                 <sf:errors path="name" class="error" />
             </td>
         </tr>
         <tr>
-            <td class="label"> Email:</td>
-            <td><sf:input class="control" type="text" path="email"/> <br />
-                <sf:errors path="email" class="error" />
+            <td class="label"> 교과구분:</td>
+            <td><sf:input class="control" type="text" path="classification"/> <br />
+                <sf:errors path="classification" class="error" />
             </td>
         </tr>
         <tr>
-            <td class="label"> Offer:</td>
-            <td><sf:textarea class="control" rows="10" cols="10" path="text" /> <br/>
-                <sf:errors path="text" class="error" />
+            <td class="label"> 담당교수:</td>
+            <td><sf:input class="control" type="text" path="professor"/> <br />
+                <sf:errors path="professor" class="error" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label"> 학점:</td>
+            <td><sf:input class="control" type="text" path="credit" value=" "/> <br />
+                <sf:errors path="credit" class="error" />
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="새 제안"/> </td>
+            <td><input type="submit" value="신청하기"/> </td>
         </tr>
     </table>
 </sf:form>

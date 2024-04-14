@@ -22,7 +22,7 @@ public class OfferController {
 
     @GetMapping("/offers")
     public String showOffers(Model model) {
-        List<Offer> offers = offerService.getAllOffers();
+        List<Offer> offers = offerService.getAllOffers(); // OfferService를 통해 모든 교과목 정보를 가져옵니다.
         model.addAttribute("id_offers", offers);
 
         return "offers";
@@ -31,7 +31,7 @@ public class OfferController {
     @GetMapping("/createoffer")
     public String createOffer(Model model) {
 
-        model.addAttribute("offer", new Offer());
+        model.addAttribute("offer", new Offer()); // 모델에 offer 속성을 추가하여 새로운 Offer 객체를 전달합니다.
 
         return "createoffer";
     }
@@ -41,10 +41,10 @@ public class OfferController {
 
         // System.out.println(offer);
 
-        if(result.hasErrors()) {
+        if(result.hasErrors()) { // 만약 입력 데이터에 유효성 검사 오류가 있다면
             System.out.println("== Form data does not validated ==");
 
-            List<ObjectError> errors = result.getAllErrors();
+            List<ObjectError> errors = result.getAllErrors(); // 모든 오류를 가져와서 처리합니다.
 
             for(ObjectError error:errors) {
                 System.out.println(error.getDefaultMessage());
@@ -54,8 +54,8 @@ public class OfferController {
         }
 
         // Controller -> Service -> Dao
-        offerService.insert(offer);
+        offerService.insert(offer); // Service를 통해 새 교과목을 삽입합니다.
 
-        return "offercreated";
+        return "home";
     }
 }

@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+thead {
+    background-color: #90ee90;
+}
+
+tfoot {
+    background-color: #ffff00;
+}
+
+#details {
+    width: 80%;
+    margin-top: 20px;
+}
+
+#details table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}

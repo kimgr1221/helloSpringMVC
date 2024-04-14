@@ -14,10 +14,12 @@ public class OfferService {
     @Autowired
     private OfferDao offerDao;
 
+    // 모든 교과목을 가져오는 메서드
     public List<Offer> getAllOffers() {
         return offerDao.getOffers();
     }
 
+    // 새 교과목을 삽입하는 메서드
     public void insert(Offer offer) {
         offerDao.insert(offer);
     }

@@ -21,35 +21,8 @@ public class OfferDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public int getRowCount() {
-        String sqlStatement= "select count(*) from offers";
-        return jdbcTemplate.queryForObject(sqlStatement, Integer.class);
 
-    }
-    //query and return a single object
-    public Offer getOffer(String name) {
-
-        String sqlStatement= "select * from offers where name=?";
-        return jdbcTemplate.queryForObject(sqlStatement, new Object[] {name},
-                new RowMapper<Offer>() {
-
-                    @Override
-                    public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-                        Offer offer= new Offer();
-
-                        offer.setId(rs.getInt("id"));
-                        offer.setName(rs.getString("name"));
-                        offer.setEmail(rs.getString("email"));
-                        offer.setText(rs.getString("text"));
-
-                        return offer;
-                    }
-                });
-    }
-
-    //query and return multiple objects
-    // cRud method
+    // 모든 교과목을 검색하여 리스트로 반환하는 메서드
     public List<Offer> getOffers() {
 
         String sqlStatement= "select * from offers";
@@ -61,9 +34,12 @@ public class OfferDao {
                 Offer offer= new Offer();
 
                 offer.setId(rs.getInt("id"));
+                offer.setYear(rs.getInt("year"));
+                offer.setSemester(rs.getInt("semester"));
                 offer.setName(rs.getString("name"));
-                offer.setEmail(rs.getString("email"));
-                offer.setText(rs.getString("text"));
+                offer.setClassification(rs.getString("classification"));
+                offer.setProfessor(rs.getString("professor"));
+                offer.setCredit(rs.getInt("credit"));
 
                 return offer;
             }
@@ -71,34 +47,19 @@ public class OfferDao {
     }
 
 
-    // Crud method
+    //  새 교과목을 삽입하는 메서드
     public boolean insert(Offer offer) {
 
+        // 속성 값을 추출
+        int year = offer.getYear();
+        int semester = offer.getSemester();
         String name= offer.getName();
-        String email= offer.getEmail();
-        String text = offer.getText();
+        String classification= offer.getClassification();
+        String professor = offer.getProfessor();
+        int credit = offer.getCredit();
 
-        String sqlStatement= "insert into offers (name, email, text) values (?,?,?)";
-
-        return (jdbcTemplate.update(sqlStatement, new Object[] {name, email, text}) == 1);
-    }
-
-    // crUd method
-    public boolean update(Offer offer) {
-
-        int id = offer.getId();
-        String name= offer.getName();
-        String email= offer.getEmail();
-        String text = offer.getText();
-
-        String sqlStatement= "update offers set name=?, email=?, text=? where id=?";
-
-        return (jdbcTemplate.update(sqlStatement, new Object[] {name, email, text, id}) == 1);
-    }
-
-    //cruD method
-    public boolean delete(int id) {
-        String sqlStatement= "delete from offers where id=?";
-        return (jdbcTemplate.update(sqlStatement, new Object[] {id}) == 1);
+        String sqlStatement= "insert into offers (year, semester, name, classification, professor, credit) values (?,?,?,?,?,?)";
+        // 쿼리를 실행하고 삽입 결과를 반환합니다.
+        return (jdbcTemplate.update(sqlStatement, new Object[] {year, semester, name, classification, professor, credit}) == 1);
     }
 }
